@@ -7,14 +7,15 @@ map(Key k,string value,context &ctx){
   int row = key.get();
   for(string n:value.split(",")){
     ctx.write(new Key(col),to_string(row)+"\t"+n);
+    col++;
   }
 }
 
 reduce(Key k, string values){
   map<int,string> row;
   for(string t:values){
-    string parts = text.split("\t");
-    row.insert(make_pair(stoi(parts[0]),parts[1]));
+    string newrow = text.split("\t");
+    row.insert(make_pair(stoi(newrow[0]),newrow[1]));
   }
   for(k : row)
     printf(row[k]+'\n');
